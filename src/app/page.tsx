@@ -12,25 +12,33 @@ export default function ProductList() {
       .then(data => setProducts(data));
   }, []);
 
+  console.log(products);
+
   return (
-    <div className="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      {products.map(product => (
-        // @ts-expect-error ignore
-        <div key={product.id} className="border rounded-lg shadow hover:shadow-lg transition">
-          {/* @ts-expect-error ignore */}
-          <img src={product.image} alt={product.title} className="w-full h-48 object-contain p-4" />
-          <div className="p-4">
-            {/* @ts-expect-error ignore */}
-            <h2 className="text-lg font-semibold">{product.title}</h2>
-            {/* @ts-expect-error ignore */}
-            <p className="text-gray-600">${product.price}</p>
-            {/* @ts-expect-error ignore */}
-            <Link href={`/product/${product.id}`}>
-              <button className="mt-2 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">View</button>
+    <div className='w-full min-h-screen py-[42px] px-20 flex flex-col gap-10 bg-white'>
+      <div className='flex flex-row gap-7 text-black leading-[64px] text-3xl'>
+        <Link href="/">Home</Link>
+        <Link href="/cart">Cart</Link>
+      </div>
+      <div className='w-full flex flex-col gap-10'>
+        <h2 className='font-extrabold text-5xl leading-[64px] text-[#18191F]'>Products</h2>
+        <div className="w-full grid grid-cols-4 gap-x-20 gap-y-20">
+          {products.map(product => (
+            // @ts-expect-error ignore
+            <Link href={`/product/${product.id}`} key={product.id} className="w-full flex flex-col h-auto gap-3">
+              {/* @ts-expect-error ignore */}
+              <img src={product.image} alt={product.title} className="w-full h-[366px] object-cover" />
+              <div className="flex flex-col gap-2">
+                {/* @ts-expect-error ignore */}
+                <h2 className="text-xl text-[#18191F] leading-[26px]">{product.title}</h2>
+                {/* @ts-expect-error ignore */}
+                <p className="px-4 font-semibold text-2xl leading-8 text-[#18191F]">Price: ${product.price}</p>
+              </div>
             </Link>
-          </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
+    
   );
 }
